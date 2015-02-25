@@ -15,7 +15,7 @@
 Trước hết Bạn là người quản trị mạng của một doanh nghiệp, trong hệ thống mạng của bạn có một máy chủ chứa dữ liệu rất quan trọng. Một buổi tối bạn để máy chủ đó chạy suốt đêm nhưng khi về đến nhà bạn truy cập vào máy chủ thì báo lỗi từ chối dịch vụ do không thể kết nối, buổi sáng bạn vội vã đến xem xét tình hình thì thấy một số dữ liệu đã bị mất và vấn đề lúc này là xem ai đã gây ra vấn đề trên. Vậy phải làm thế nào để điều tra xử lý, hay đơn giản là tìm nguyên nhân để khắc phục hậu quả vừa xảy ra. Log sẽ giúp bạn làm việc này.
 
 <img src="https://lh6.googleusercontent.com/-iMgGDt5jbEE/UYzNUUHrCXI/AAAAAAAAAaA/6bpFV0uCO5s/w712-h534-no/logstack.jpg">
-<ul><ul><ul><ul><ul><ul><ul><ul>*nguồn https://plus.google.com/+RainerGerhards/posts*</ul></ul></ul></ul></ul></ul></ul></ul>
+<ul><ul><ul><ul><ul><ul><ul><ul>nguồn https://plus.google.com/+RainerGerhards/posts</ul></ul></ul></ul></ul></ul></ul></ul>
 
 Vậy nên tác dụng của log là
 - Log **ghi lại liên tục** các thông báo về hoạt động của cả hệ thống hoặc của các dịch vụ được triển khai trên hệ thống và file tương ứng. Log file thường là các file văn bản thông thường dưới dạng “clear text” tức là bạn có thể dễ dàng đọc được nó, vì thế có thể sử dụng các trình soạn thảo văn bản (vi, vim, nano...) hoặc các trình xem văn bản thông thường (cat, tailf, head...) là có thể xem được file log.
@@ -41,6 +41,8 @@ Hiểu một cách đơn giản : Log tâp trung là quá trình tập trung, th
 </ul>
 
 <img src="http://tomstockton.us/pictures/062/too_many_logs.jpg">
+nguồn http://tomstockton.us
+
 
 - Đảm bảo tính toàn vẹn, bí mật, sẵn sàng của log.
 <ul>
