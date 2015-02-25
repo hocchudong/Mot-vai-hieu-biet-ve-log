@@ -23,6 +23,7 @@ Vậy nên tác dụng của log là
 - Các file log có thể nói cho bạn bất cứ thứ gì bạn cần biết, để giải quyết các rắc rối mà bạn gặp phải miễn là bạn biết ứng dụng nào, tiến trình nào được ghi vào log nào cụ thể.
 - Trong hầu hết hệ thống Linux thì **`/var/log`** là nơi lưu lại tất cả các log.
 - Như đã nói ở trên, tác dụng của log là vô cùng to lớn, nó có thể giúp quản trị viên **theo dõi hệ thống của mình tôt hơn, hoặc giải quyết các vấn đề gặp phải** với hệ thống hoặc service. Điều này đặc biệt quan trọng với các hệ thống cần phải online 24/24 để phục vụ nhu cầu của mọi người dùng.
+
 ---
 <a name="2"></a>
 ####2. Log tập trung
