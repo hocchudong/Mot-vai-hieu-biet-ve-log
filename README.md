@@ -165,7 +165,7 @@ nguồn http://tomstockton.us
 
 **Do đó lợi ích của log tập trung đem lại là**
 - Giúp quản trị viên có cái nhìn chi tiết về hệ thống -> có định hướng tốt hơn về hướng giải quyết
-- Khi hệ thống bị tấn công, tất cả các hoạt động của hệ thống đều được lưu lại ở một nơi an toàn -> đảm bảo tính toàn vẹn log để phân tích điều tra
+- Mọi hoạt động của hệ thống được ghi lại và lưu trữ ở một nơi an toàn (log server)  -> đảm bảo tính toàn vẹn phục vụ cho quá trình phân tích điều tra các cuộc tấn công vào hệ thống
 - Log tập trung kết hợp với các ứng dụng thu thập và phân tích log khác nữa giúp cho việc phân tích log trở nên thuận lợi hơn -> giảm thiểu nguồn nhân lực.
 </ul>
 
