@@ -34,7 +34,9 @@ dmesg | grep pnp | less
 Log hệ thống thông thường chứa các thông tin mặc định của hệ thống, thường được lưu trong /var/log/syslog hoặc /var/log/message.
 ###Log rotation - Xoay vòng file log
 Thông thường khi nhìn vào thư mục /var/log, bạn thường thấy các log file có dạng như "daemon.log.0", "daemon.log.1.gz", đó chính là các "rotated"
-log file. Hệ thống sẽ tự động nén các file log cũ lại sau một time-frame được định sẵn, và bắt đầu một file log gốc mới. Mục đích của quá trình
-"log rotation" nhằm lưu trữ và nén các log cũ để tiết kiệm không gian ổ đĩa, nhưng vẫn sẵn sàng dùng lại được nếu cần.
+log file. Hệ thống sẽ tự động nén các file log cũ lại sau một time-frame được định sẵn, và bắt đầu một file log gốc mới. 
+
+Mục đích của quá trình "log rotation" nhằm lưu trữ và nén các log cũ để tiết kiệm không gian ổ đĩa, nhưng vẫn sẵn sàng dùng lại được nếu cần.
+
 Thông thường, quá trình "rotation" được cấu hình trong file **/etc/logrotate.conf**. Các file cấu hình *rotate* riêng cho một số file log như :
 rsyslog, dpkg, apache, apt... sẽ được thêm vào trong **/etc/logrotate.d/**
