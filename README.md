@@ -1,6 +1,7 @@
-#Một số hiểu biết cơ bản về log
-<a name="ml"></a>
-[Mục lục](#ml)
+# Một số hiểu biết cơ bản về log
+
+<a name="index"></a>
+[Mục lục](#index)
 
 - [1. Khái niệm cơ bản về log](#1)
 - [2. Syslog và Rsyslog](#2)
@@ -9,14 +10,14 @@
 
 ---
 <a name="1"></a>
-####1. Khái niệm về log
+## 1. Khái niệm về log
 *Log là gì? Log để làm gì?*
 
 Trước hết Bạn là người quản trị mạng của một doanh nghiệp, trong hệ thống mạng của bạn có một máy chủ chứa dữ liệu rất quan trọng. Một buổi tối bạn để máy chủ đó chạy suốt đêm nhưng khi về đến nhà bạn truy cập vào máy chủ thì báo lỗi từ chối dịch vụ do không thể kết nối, buổi sáng bạn vội vã đến xem xét tình hình thì thấy một số dữ liệu đã bị mất và vấn đề lúc này là xem ai đã gây ra vấn đề trên. Vậy phải làm thế nào để điều tra xử lý, hay đơn giản là tìm nguyên nhân để khắc phục hậu quả vừa xảy ra. Log sẽ giúp bạn làm việc này.
 
 <img src="https://lh6.googleusercontent.com/-iMgGDt5jbEE/UYzNUUHrCXI/AAAAAAAAAaA/6bpFV0uCO5s/w712-h534-no/logstack.jpg">
 
-nguồn https://plus.google.com/+RainerGerhards/posts
+nguồn: https://plus.google.com/+RainerGerhards/posts
 
 *Vậy nên tác dụng của log là:*
 
@@ -29,7 +30,7 @@ Như đã nói ở trên, tác dụng của log là vô cùng to lớn, nó có 
 
 ---
 <a name="2"></a>
-####2. Syslog và Rsyslog
+## 2. Syslog và Rsyslog
 
 **2.1 Giới thiệu về Syslog**
 
@@ -40,7 +41,7 @@ Trong năm 2009, Internet Engineering Task Forec (IETF) đưa ra chuẩn syslog 
 
 Syslog ban đầu sử dụng UDP, điều này là không đảm bảo cho việc truyền tin. Tuy nhiên sau  đó IETF đã ban hành RFC 3195 Reliable Delivery for syslog - đảm bảo tin cậy cho syslog và  RFC 6587 Transmission of Syslog Messages over TCP - Truyền tải thông báo syslog qua TCP. Điều này có nghĩa là ngoài UDP thì giờ đây syslog cũng đã sử dụng TCP để đảm bảo an toàn cho quá trình truyền tin.
 
-Trong chuẩn syslog, mỗi thông báo đều được dán nhãn và được gán các mức độ nghiêm trọng  khác nhau. Các loại phần mềm sau có thể sinh ra thông báo: auth , authPriv , daemon ,  cron , ftp , dhcp , kern , mail, syslog, user, ... Với các mức độ nghiêm trọng từ cao  nhất trở xuống Emergency, Alert, Critical, Error, Warning, Notice, Info, and Debug.
+Trong chuẩn syslog, mỗi thông báo đều được dán nhãn và được gán các mức độ nghiêm trọng  khác nhau. Các loại phần mềm sau có thể sinh ra thông báo: auth, authPriv, daemon,  cron, ftp, dhcp, kern, mail, syslog, user,... Với các mức độ nghiêm trọng từ cao  nhất trở xuống Emergency, Alert, Critical, Error, Warning, Notice, Info, and Debug.
 
 
 **Nguồn sinh ra log**
@@ -82,25 +83,25 @@ Trong chuẩn syslog, mỗi thông báo đều được dán nhãn và được 
 
 **Định dạng chung của một gói tin syslog.**
 
-Định dạng hoàn chỉnh của một thông báo syslog gồm có 3 phần chính như sau
+Định dạng hoàn chỉnh của một thông báo syslog gồm có 3 phần chính như sau, và độ dài một thông báo không được vượt quá 1024 bytes:
 
-`<PRI> HEADER MSG`
+```
+<PRI> HEADER MSG
+```
 
-Độ dài một thông báo không được vượt quá 1024 bytes
+`PRI`
 
-- PRI
+Phần `PRI` hay `Priority` là một số được đặt trong ngoặc nhọn, thể hiện cơ sở sinh ra log hoặc mức độ nghiêm trọng, là một số gồm 8 bit:
+- 3 bit đầu tiên thể hiện cho tính nghiêm trọng của thông báo.
+- 5 bit còn lại đại diện cho sơ sở sinh ra thông báo.
 
-Phần PRI là một số được đặt trong ngoặc nhọn, thể hiện cơ sở sinh ra log hoặc mức độ  
-nghiêm trọng. là 1 số 8bit. 3 bit đầu tiên thể hiện cho tính nghiêm trọng của thông báo.5  
-bit còn lại đại diện cho sơ sở sinh ra thông báo.
+Giá trị Priority được tính như sau: Cơ sở sinh ra log x 8 + Mức độ nghiêm trọng.
 
-Giá trị Priority được tính như sau: Cơ sở sinh ra log x 8 + Mức độ nghiêm trọng. Ví dụ,   
-thông báo từ kernel (Facility = 0) với mức độ nghiêm trọng (Severity =0) thì giá trị  
-Priority = 0x8 +0 = 0. Trường hợp khác,với "local use 4" (Facility =20) mức độ nghiêm  
-trọng (Severity =5) thì số Priority là 20 x 8 + 5 = 165. 
+Ví dụ, thông báo từ kernel (Facility = 0) với mức độ nghiêm trọng (Severity =0) thì giá trị Priority = 0x8 +0 = 0.
 
-Vậy biết một số Priority thì làm thế nào để biết nguồn sinh log và mức độ nghiêm trọng  
-của nó. Ta xét 1 ví dụ sau:
+Trường hợp khác, với "local use 4" (Facility =20) mức độ nghiêm trọng (Severity =5) thì số Priority là 20 x 8 + 5 = 165. 
+
+Vậy biết một số Priority thì làm thế nào để biết nguồn sinh log và mức độ nghiêm trọng của nó. Ta xét 1 ví dụ sau:
 
 Priority = 191
 Lấy 191:8 = 23.875
@@ -108,19 +109,18 @@ Lấy 191:8 = 23.875
 -> Severity = 191 - (23 * 8 ) = 7 (debug)
 
 
-- HEADER
+`HEADER`
 
- <ul>Phần Header thì gồm các phần chính sau
-<li>Time stamp -- Thời gian mà thông báo được tạo ra. Thời gian này được lấy từ thời gian hệ thống ( Chú ý nếu như thời gian của server và thời gian của client khác nhau thì thông báo ghi trên log được gửi lên server là thời gian của máy client)</li>
-<li>Hostname hoặc IP</li>
-</ul>
+Phần `HEADER` thì gồm các phần chính sau:
+- Time stamp - Thời gian mà thông báo được tạo ra. Thời gian này được lấy từ thời gian hệ thống ( Chú ý nếu như thời gian của server và thời gian của client khác nhau thì thông báo ghi trên log được gửi lên server là thời gian của máy client)
+- Hostname hoặc IP
 
-- Message
 
- <ul>Phần MSG chứa một số thông tin về quá trình tạo ra thông điệp đó. Gồm 2 phần chính
-<li>Tag field</li>
-<li>Content field</li>
-</ul>
+`MSG`
+
+Phần `Message` hay `MSG` chứa một số thông tin về quá trình tạo ra thông điệp đó. Gồm 2 phần chính:
+- Tag field
+- Content field
 
 *Tag field* là tên chương trình tạo ra thông báo. *Content field* chứa các chi tiết của thông báo
 
@@ -135,7 +135,7 @@ Twitter của tác giả Rsyslog [Twitter](https://twitter.com/rgerhards/)
 
 ---
 <a name="3"></a>
-####3. Log tập trung
+## 3. Log tập trung
 
 **Tác dụng của log là vô cùng to lớn vậy làm thế nào để quản lý log tốt hơn?**
 
@@ -145,23 +145,15 @@ Hiểu một cách đơn giản : Log tâp trung là quá trình tập trung, th
 
 **Tại sao lại phải sử dụng log tập trung?**
 
-- Do có nhiều nguồn sinh log <ul>
-<li> Có nhiều nguồn sinh ra log, log nằm trên nhiều máy chủ khác nhau nên khó quản lý.</li>
-<li>Nội dung log không đồng nhất (Giả sử log từ nguồn 1 có có ghi thông tin về ip mà không ghi thông tin về user name đăng nhập mà log từ nguồn 2 lại có) -> khó khăn trong việc kết hợp các log với nhau để xử lý vấn đề gặp phải.</li>
-<li>Định dạng log cũng không đồng nhất -> khó khăn trong việc chuẩn hóa</li>
-</ul>
-
-<img src="http://tomstockton.us/pictures/062/too_many_logs.jpg">
-
-nguồn http://tomstockton.us
-
+- Do có nhiều nguồn sinh log
+  * Có nhiều nguồn sinh ra log, log nằm trên nhiều máy chủ khác nhau nên khó quản lý.
+  * Nội dung log không đồng nhất (Giả sử log từ nguồn 1 có có ghi thông tin về ip mà không ghi thông tin về user name đăng nhập mà log từ nguồn 2 lại có) -> khó khăn trong việc kết hợp các log với nhau để xử lý vấn đề gặp phải.
+  * Định dạng log cũng không đồng nhất -> khó khăn trong việc chuẩn hóa
 
 - Đảm bảo tính toàn vẹn, bí mật, sẵn sàng của log.
-<ul>
-<li> Do có nhiều các rootkit được thiết kế để xóa bỏ logs.
-<li> Do log mới được ghi đè lên log cũ.
+  * Do có nhiều các rootkit được thiết kế để xóa bỏ logs.
+  * Do log mới được ghi đè lên log cũ
 -> Log phải được lưu trữ ở một nơi an toàn và phải có kênh truyền đủ đảm bảo tính an toàn và sẵn sàng sử dụng  để phân tích hệ thống.
-</ul>
 
 **Do đó lợi ích của log tập trung đem lại là**
 - Giúp quản trị viên có cái nhìn chi tiết về hệ thống -> có định hướng tốt hơn về hướng giải quyết
@@ -172,12 +164,8 @@ nguồn http://tomstockton.us
 
 ---
 <a name="4"></a>
-Bài viết sử dụng tài liệu tham khảo sau:
-```sh
-http://en.wikipedia.org/wiki/Syslog
-http://en.wikipedia.org/wiki/Rsyslog
-https://phulc.wordpress.com/tag/su-can-thiet-cua-he-thong-quan-ly-log-tap-trung/
+## 4. Tham khảo
 
-```
-
-
+- [http://en.wikipedia.org/wiki/Syslog](http://en.wikipedia.org/wiki/Syslog)
+- [http://en.wikipedia.org/wiki/Rsyslog](http://en.wikipedia.org/wiki/Rsyslog)
+- [https://phulc.wordpress.com/tag/su-can-thiet-cua-he-thong-quan-ly-log-tap-trung](https://phulc.wordpress.com/tag/su-can-thiet-cua-he-thong-quan-ly-log-tap-trung/)
