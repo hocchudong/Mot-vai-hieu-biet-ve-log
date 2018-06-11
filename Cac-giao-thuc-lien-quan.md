@@ -1,25 +1,25 @@
 
-#Các giao thức liên quan đến syslog
+# Các giao thức liên quan đến syslog
 
-<a name="ml"></a>
-###[Mục Lục](#ml)
+<a name="index"></a>
+## [Mục Lục](#index)
 - [1. TCP/UDP](#1)
 - [2. SSL/TLS](#2)
 - [3. Tổng kết](#3)
 
 
 <a name="1"></a>
-####1. TCP/UDP
+## 1. TCP/UDP
 
 Như ta đã biết syslog sử dụng giao thức UDP hoặc TCP để truyền tin trên mạng vậy TCP và UDP khác nhau thế nào?
 
-#####TCP 
+### TCP 
 
 TCP là viết tắt của Transmission Control Protocol. Đó là giao thức phổ biến nhất được sử dụng trên Internet.
 
-TCP hoạt động theo hướng kết nối (connection-oriented), trước khi truyền dữ liệu giữa 2 máy, nó thiết lập một kết nối giữa 2 máy theo phương thức "bắt tay 3 bước (three-way-hand-shake)" bằng cách gửi gói tin ACK từ máy đích sang máy nhận, trong suốt quá trình truyền gói tin, máy gửi yêu cầu máy đích xác nhận đã nhận đủ các gói tin đã gửi, nếu có gói tin bị mất, máy đích sẽ yêu cầu máy gửi gửi lại, thường xuyên kiểm tra gói tin có bị lỗi hay ko, ngoài ra còn cho phép qui định số lượng gói tin được gửi trong một lần gửi (window-sizing), điều này đảm bảo máy nhận nhận được đầy đủ các gói tin mà máy gửi gửi đi --> truyền dữ liệu chậm hơn UDP nhưng đáng tin cậy hơn UDP
+TCP hoạt động theo hướng kết nối (connection-oriented), trước khi truyền dữ liệu giữa 2 máy, nó thiết lập một kết nối giữa 2 máy theo phương thức "bắt tay 3 bước (three-way-hand-shake)" bằng cách gửi gói tin ACK từ máy đích sang máy nhận, trong suốt quá trình truyền gói tin, máy gửi yêu cầu máy đích xác nhận đã nhận đủ các gói tin đã gửi, nếu có gói tin bị mất, máy đích sẽ yêu cầu máy gửi gửi lại, thường xuyên kiểm tra gói tin có bị lỗi hay ko, ngoài ra còn cho phép qui định số lượng gói tin được gửi trong một lần gửi (window-sizing), điều này đảm bảo máy nhận nhận được đầy đủ các gói tin mà máy gửi gửi đi --> truyền dữ liệu chậm hơn UDP nhưng đáng tin cậy hơn UDP.
 
-#####UDP 
+### UDP 
 
 UDP là viết tắt của User Datagram Protocol - một gói tương tự như một gói của thông tin.
 
@@ -28,16 +28,15 @@ UDP hoạt động theo hướng không kết nối (connectionless), không yê
 
 Do đặc điểm của mình, UDP vẫn thường được sử dụng trong các ứng dụng mà đòi hỏi về tốc độ mà ít cần phải sửa lỗi. Ví dụ, UDP thường được sử dụng cho chương trình phát sóng trực tiếp và trò chơi trực tuyến.
 
-#####VD
+### Ví dụ
 
 - TCP: Người đưa thư phải đảm bảo thư có chữ ký của người gửi và đúng địa chỉ đó với người nhận là duy nhất để gửi thư đúng.
-
 - UDP : Người đưa thư nhận thư, vứt vào hòm thư, tuy nhiên thư này gửi cho người chồng mà người vợ lại thấy ghi địa chỉ nhà mình nên cũng có thể mở ra đọc được
 
 ---
 
 <a name="2"></a>
-####2. SSL/TLS
+## 2. SSL/TLS
 
 Giao thức SSL (Secure Socket Layer) được phát triển bởi Netscape, ngày nay giao thức SSL đã được sử dụng rộng rãi trên World Wide Web trong việc xác thực và mã hoá thông tin giữa client và server. Tổ chức IETF (Internet Engineering Task Force ) đã chuẩn hoá SSL và đặt lại tên là TLS (Transport Layer Security). Mặc dù là có sự thay đổi về tên nhưng TSL chỉ là một phiên bản mới của SSL. Phiên bản TSL 1.0 tương đương với phiên bản SSL 3.1. Tuy nhiên SSL là thuật ngữ được sử dụng.
 
@@ -57,7 +56,7 @@ Công nghệ SSl bảo vệ những giao dịch trực tuyến và năng cao m�
 ---
 
 <a name="3"></a>
-####3. Tổng kết
+## 3. Tổng kết
 
 Vậy ứng dụng của các giao thức này vào syslog thế nào
 
@@ -67,10 +66,7 @@ Vậy ứng dụng của các giao thức này vào syslog thế nào
 
 ---
 
-Tham khảo:
+## Tham khảo:
 
-http://en.wikipedia.org/wiki/Transport_Layer_Security
-
-http://www.rsyslog.com/doc/rsyslog_tls.html
-
-
+- http://en.wikipedia.org/wiki/Transport_Layer_Security
+- http://www.rsyslog.com/doc/rsyslog_tls.html
